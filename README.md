@@ -1,4 +1,4 @@
-# Amnesia ReST API Structure
+# Amnesia ReST API Structure - IOV FORK
 
 ## Introduction 
 
@@ -12,7 +12,7 @@ The backend of Amnesia is implemented in Java using the Spring framework. Its co
 
     To successfully build the Amnesia engine follow these steps:
     1.   Clone the project
-    2.   Download pixelmed.jar from http://www.dclunie.com/pixelmed/software/webstart/pixelmed.jar and install manually to amnesia's Dependencies.
+    2.   Download pixelmed.jar from http://www.dclunie.com/pixelmed/software/webstart/pixelmed.jar and install manually to amnesia's Dependencies (https://devcenter.heroku.com/articles/local-maven-dependencies  potrebbe bastare cambiare il path relativo nel pom nel tag repositories)
     3.   Go to controller/AppCon.java and set the variable "os" with desired operation system ("windows" or "linux")
     4.   Build the project
     5.   Take the .jar from the "scr/target" directory. 
