@@ -1,5 +1,7 @@
 # Amnesia ReST API Structure - IOV FORK
 
+Solved CORS header issue for client-server deploy (see https://howtodoinjava.com/spring-boot2/spring-cors-configuration/#:~:text=By%20default%2C%20%40CrossOrigin%20allows%20all,a%20maxAge%20of%2030%20minutes.&text=List%20of%20allowed%20origins.,response%20and%20the%20actual%20response.)
+
 ## Introduction 
 
 The backend of Amnesia is implemented in Java using the Spring framework. Its components offer a ReST API that handles anonymization requests issued by the web interface. It uses a temporary local storage for the anonymization purposes and final results are returned by the ReST interface. There are three ways to communicate with Amnesia’s backend procedures:

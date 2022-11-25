@@ -130,12 +130,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import solutions.FindSolutions;
@@ -198,6 +193,7 @@ public class AppCon extends SpringBootServletInitializer {
 
 
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 //@RequestMapping("/greeting")
 class AppController {
@@ -205,7 +201,9 @@ class AppController {
     
     private static String rootPath = AppCon.rootPath;
 
-    
+
+
+
     @RequestMapping(value = "/")
     public String welcome(HttpSession session) {
         return "/index.html";
@@ -3842,8 +3840,7 @@ class AppController {
         return solutionsArr;
         
     }
-    
-    
+
     @RequestMapping(value="/action/getdashboard", method = RequestMethod.POST) //method = RequestMethod.POST
     public @ResponseBody String getdashboard ( HttpSession session)  {
        String str = null;
