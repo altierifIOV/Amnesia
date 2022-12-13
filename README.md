@@ -5,7 +5,7 @@ Solved CORS header issue for client-server deploy (see https://howtodoinjava.com
 ## Setup
 - Place GUI html files WITHOUT containing folder in src/main/reources/static/amnesia/
 - run maven package
-- deploy on linux running the java command below (better on door 8080)
+- deploy on linux running the java command below (better on door 8080) - set automatic startup using this guide: http://www.jcgonzalez.com/ubuntu-16-java-service-wrapper-example
 - browse to http://yourdomain:yourdoor/amnesia/yourindexpage.html
 - enjoy
 
