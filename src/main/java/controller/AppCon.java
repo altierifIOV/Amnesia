@@ -108,6 +108,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -169,7 +170,14 @@ public class AppCon extends SpringBootServletInitializer {
     
 }
 
-
+@Controller
+@RequestMapping({"/amnesia"})
+class TestingController {
+    @RequestMapping({"", "/index"})
+    public String someOtherPage(HttpServletRequest request, HttpServletResponse response) {
+        return "redirect:/amnesia/index.html";
+    }
+}
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
