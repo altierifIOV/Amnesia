@@ -14,8 +14,6 @@ import anonymizeddataset.AnonymizedDataset;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.primitives.Ints;
-import static controller.AppCon.os;
-import static controller.AppCon.rootPath;
 import data.CheckDatasetForKAnomymous;
 import data.DICOMData;
 import data.Data;
@@ -35,7 +33,6 @@ import graph.DatasetsExistence;
 import graph.Edge;
 import graph.Node;
 import graph.Graph;
-import hierarchy.DemographicInfo;
 import hierarchy.HierToJson;
 import hierarchy.Hierarchy;
 import hierarchy.distinct.AutoHierarchyImplDate;
@@ -46,39 +43,28 @@ import hierarchy.distinct.HierarchyImplDemographicZipCode;
 import hierarchy.distinct.HierarchyImplDouble;
 import hierarchy.distinct.HierarchyImplString;
 import hierarchy.ranges.AutoHierarchyImplRangesDate;
-import hierarchy.ranges.AutoHierarchyImplRangesNumbers;
 import hierarchy.ranges.AutoHierarchyImplRangesNumbers2;
 import hierarchy.ranges.HierarchyImplRangeDemographicAge;
 import hierarchy.ranges.HierarchyImplRangesDate;
 import hierarchy.ranges.HierarchyImplRangesNumbers;
 import hierarchy.ranges.RangeDate;
 import hierarchy.ranges.RangeDouble;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.management.MemoryUsage;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.CodeSource;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -87,7 +73,6 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -96,7 +81,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -105,12 +89,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -122,13 +103,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -144,7 +123,6 @@ import statistics.HierarchiesAndLevels;
 import statistics.Queries;
 import statistics.Results;
 import statistics.ResultsToJson;
-import zenodo.LoadFromZenodoPanel;
 import zenodo.ZenodoConnection;
 import zenodo.ZenodoFile;
 import zenodo.ZenodoFilesToJson;
@@ -248,7 +226,7 @@ class AppController {
 //                String rootPath = System.getProperty("catalina.home");
                 //String rootPath = "/usr/local/apache-tomcat-8.0.15";
 //                String rootPath = "/var/lib/tomcat8";
-                dir = new File(rootPath + File.separator + "amnesia"+ File.separator + session.getId());  
+                dir = new File(rootPath + File.separator + "amnesia" + File.separator + session.getId());
                 if (!dir.exists()){
                     dir.mkdirs();
                 }
@@ -361,7 +339,7 @@ class AppController {
             System.out.println("Error handling");
 //            String rootPath = System.getProperty("catalina.home");
 //            String rootPath = "/var/lib/tomcat8";
-            File dir = new File(rootPath+File.separator+"amnesia"+File.separator+"errorLog");
+            File dir = new File(rootPath+File.separator+ "amnesia" +File.separator+"errorLog");
             if(!dir.exists()){
                 dir.mkdirs();
             }
@@ -483,7 +461,7 @@ class AppController {
                     //System.out.println("session id  = " + session.getId());
 //                    String rootPath = System.getProperty("catalina.home");
 //                    String rootPath = "/var/lib/tomcat8";
-                    dir = new File(rootPath + File.separator + "amnesia"+ File.separator + session.getId());  
+                    dir = new File(rootPath + File.separator + "amnesia" + File.separator + session.getId());
                     
 //                    System.out.println("dir name = " + dir.getAbsolutePath() + "\t root path = " + rootPath);
                     if (!dir.exists()){
@@ -2377,11 +2355,11 @@ class AppController {
         
         
         if(os.equals("online")){
-            dir = new File(this.rootPath + File.separator + "amnesia"+ File.separator + session.getId());  
+            dir = new File(this.rootPath + File.separator + "amnesia" + File.separator + session.getId());
             if (!dir.exists()){
                 dir.mkdirs();
             }
-            inputPath = this.rootPath + File.separator + "amnesia"+ File.separator + session.getId();
+            inputPath = this.rootPath + File.separator + "amnesia" + File.separator + session.getId();
         }
         else{
             dir = new File(rootPath + File.separator + "amnesiaResults"+ File.separator + session.getId());  
@@ -2428,11 +2406,11 @@ class AppController {
         }
         if ( inputPath == null){
             if(os.equals("online")){
-                dir = new File(this.rootPath + File.separator + "amnesia"+ File.separator + session.getId());  
+                dir = new File(this.rootPath + File.separator + "amnesia" + File.separator + session.getId());
                 if (!dir.exists()){
                     dir.mkdirs();
                 }
-                inputPath = this.rootPath + File.separator + "amnesia"+ File.separator + session.getId();
+                inputPath = this.rootPath + File.separator + "amnesia" + File.separator + session.getId();
             }
             else{
                 dir = new File(rootPath + File.separator + "amnesiaResults"+ File.separator + session.getId());  
