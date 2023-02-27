@@ -179,7 +179,7 @@ class TestingController {
     }
 }
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = {"http://localhost:8080", "https://localhost:443"}, allowedHeaders = "*")
 @RestController
 //@RequestMapping("/greeting")
 class AppController {
