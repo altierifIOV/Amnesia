@@ -19,7 +19,7 @@ public class AmnesiaConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOrigins("https://amnesia.iov.veneto.it:8443/*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .maxAge(3600);
